@@ -1,4 +1,4 @@
-package com.plcoding.bookpedia
+package com.sm.bookpedia
 
 import platform.UIKit.UIDevice
 
