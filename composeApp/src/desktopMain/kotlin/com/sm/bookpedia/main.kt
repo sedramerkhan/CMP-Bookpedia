@@ -1,19 +1,15 @@
 package com.sm.bookpedia
 
-import androidx.compose.runtime.remember
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import io.ktor.client.engine.okhttp.OkHttp
+import com.sm.bookpedia.di.initKoin
 
 fun main() = application {
+    initKoin()
     Window(
         onCloseRequest = ::exitApplication,
         title = "CMP-Bookpedia",
     ) {
-        App(
-            engine =
-                remember {
-                    OkHttp.create()
-                })
+        App()
     }
 }
