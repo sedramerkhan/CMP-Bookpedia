@@ -2,15 +2,11 @@ package com.sm.bookpedia.app
 
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -20,6 +16,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.sm.bookpedia.book.presentation.SelectedBookViewModel
+import com.sm.bookpedia.book.presentation.book_detail.BookDetailAction
+import com.sm.bookpedia.book.presentation.book_detail.BookDetailScreenRoot
+import com.sm.bookpedia.book.presentation.book_detail.BookDetailViewModel
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import com.sm.bookpedia.book.presentation.book_list.BookListScreenRoot
@@ -53,7 +52,7 @@ fun App() {
 
 
                     //reset book when go back to screen
-                    LaunchedEffect(true){
+                    LaunchedEffect(true) {
                         selectedBookViewModel.onSelectBook(null)
                     }
 
@@ -84,17 +83,22 @@ fun App() {
                     val selectedBookViewModel =
                         it.sharedKoinViewModel<SelectedBookViewModel>(navController)
 
-                    val selectedBook = selectedBookViewModel.selectedBook.collectAsStateWithLifecycle()
+                    val viewModel = koinViewModel<BookDetailViewModel>()
 
-                    Box(
-                        modifier =
-                            Modifier
-                                .fillMaxSize()
-                                .background(MaterialTheme.colorScheme.background)
-                    ) {
+                    val selectedBook by selectedBookViewModel.selectedBook.collectAsStateWithLifecycle()
 
-                        Text("Details is ${selectedBook.value}")
+                    LaunchedEffect(selectedBook) {
+                        selectedBook?.let {
+                            viewModel.onAction(BookDetailAction.OnSelectedBookChange(it))
+
+                        }
                     }
+                    BookDetailScreenRoot(
+                        viewModel = viewModel,
+                        onBackClick = {
+                            navController.navigateUp()
+                        }
+                    )
 
                 }
             }

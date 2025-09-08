@@ -5,6 +5,7 @@ import com.sm.bookpedia.book.data.network.RemoteBookDataSource
 import com.sm.bookpedia.book.data.repository.DefaultBookRepository
 import com.sm.bookpedia.book.domain.BookRepository
 import com.sm.bookpedia.book.presentation.SelectedBookViewModel
+import com.sm.bookpedia.book.presentation.book_detail.BookDetailViewModel
 import com.sm.bookpedia.book.presentation.book_list.BookListViewModel
 import com.sm.bookpedia.core.data.HttpClientFactory
 
@@ -25,5 +26,6 @@ val sharedModule = module {
 
     viewModelOf(::BookListViewModel)
     viewModelOf(::SelectedBookViewModel)
+    viewModelOf(::BookDetailViewModel)
 
 }
