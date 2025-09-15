@@ -30,6 +30,7 @@ import coil3.compose.rememberAsyncImagePainter
 
 import com.sm.bookpedia.book.domain.Book
 import com.sm.bookpedia.core.presentation.LightBlue
+import com.sm.bookpedia.core.presentation.PulseAnimation
 import com.sm.bookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 
@@ -91,7 +92,7 @@ fun BookListItem(
                 )
 
                 when (val result = imageLoadResult) {
-                    null -> CircularProgressIndicator()
+                    null -> PulseAnimation()
 
                     else -> {
                         Image(
