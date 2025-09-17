@@ -79,7 +79,7 @@ fun BookSearchBar(
             ),
             trailingIcon = {
                 TrailingIcon(
-                    isBlank = searchQuery.isBlank(),
+                    isNotBlank = searchQuery.isNotBlank(),
                     onSearchQueryChange = onSearchQueryChange
                 )
             },
@@ -96,11 +96,11 @@ fun BookSearchBar(
 
 @Composable
 fun TrailingIcon(
-    isBlank: Boolean,
+    isNotBlank: Boolean,
     onSearchQueryChange: (String) -> Unit,
 ) {
     AnimatedVisibility(
-        visible = isBlank
+        visible = isNotBlank
     ) {
         IconButton(
             onClick = {

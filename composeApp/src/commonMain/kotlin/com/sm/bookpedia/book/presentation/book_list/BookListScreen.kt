@@ -161,6 +161,7 @@ fun BookListScreen(
                                         }
                                         state.searchResults.isEmpty() -> {
                                             Text(
+                                                modifier = Modifier.padding(horizontal = 16.dp),
                                                 text = stringResource(Res.string.no_search_results),
                                                 textAlign = TextAlign.Center,
                                                 style = MaterialTheme.typography.headlineSmall,

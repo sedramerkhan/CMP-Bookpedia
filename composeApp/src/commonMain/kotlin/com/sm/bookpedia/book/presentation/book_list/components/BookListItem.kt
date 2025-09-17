@@ -66,7 +66,7 @@ fun BookListItem(
                     model = book.imageUrl,
                     onSuccess = {
                         imageLoadResult =
-                            it.painter.intrinsicSize.let{ size->
+                            it.painter.intrinsicSize.let { size ->
                                 if (size.width > 1 && size.height > 1) {
                                     Result.success(it.painter)
                                 } else {
@@ -92,7 +92,10 @@ fun BookListItem(
                 )
 
                 when (val result = imageLoadResult) {
-                    null -> PulseAnimation()
+                    null -> PulseAnimation(
+                        modifier = Modifier
+                            .size(60.dp)
+                    )
 
                     else -> {
                         Image(
